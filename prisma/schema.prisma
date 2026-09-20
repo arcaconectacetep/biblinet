@@ -1,0 +1,128 @@
+// Biblinet — school library management system.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+  DEV
+}
+
+enum BookFormat {
+  PHYSICAL
+  DIGITAL
+}
+
+enum BugStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  name               String
+  username           String    @unique
+  email              String?   @unique
+  passwordHash       String
+  role               Role      @default(STUDENT)
+  mustChangePassword Boolean   @default(true)
+  // Bumped on every credential change so previously issued sessions stop working.
+  sessionVersion     Int       @default(0)
+  failedLoginCount   Int       @default(0)
+  lockedUntil        DateTime?
+
+  // Student-specific profile data.
+  registrationNumber String?
+  birthDate          DateTime? @db.Date
+  course             String?
+  gradeYear          String?
+  className          String?
+
+  // Contact details (optional for every role).
+  taxId   String?
+  phone   String?
+  address String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  loans         Loan[]
+  boardMessages BoardMessage[]
+  bugReports    BugReport[]
+
+  @@index([role, name])
+}
+
+model Book {
+  id       String     @id @default(cuid())
+  title    String
+  author   String
+  genre    String
+  format   BookFormat @default(PHYSICAL)
+  /// Physical shelf label, e.g. "Estante A-3". Required for PHYSICAL books.
+  shelf    String?
+  /// Public URL of the PDF. Required for DIGITAL books.
+  fileUrl  String?
+  coverUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  loans Loan[]
+
+  @@index([title])
+  @@index([genre])
+  @@index([format])
+}
+
+model Loan {
+  id         String    @id @default(cuid())
+  userId     String
+  bookId     String
+  dueDate    DateTime  @db.Date
+  returnedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@index([userId, returnedAt])
+  @@index([bookId, returnedAt])
+  @@index([dueDate])
+}
+
+/// Public message board. Messages older than 24h are pruned on read.
+model BoardMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  content   String   @db.VarChar(280)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+}
+
+model BugReport {
+  id          String    @id @default(cuid())
+  userId      String?
+  category    String
+  description String    @db.VarChar(1000)
+  status      BugStatus @default(OPEN)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+}
