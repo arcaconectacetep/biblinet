@@ -96,7 +96,7 @@ export default async function AdminDashboardPage() {
         }
       />
 
-      <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+      <div className="stagger-children grid grid-cols-2 gap-3 xl:grid-cols-4">
         <StatCard
           label="Acervo"
           value={bookCount}
@@ -124,7 +124,7 @@ export default async function AdminDashboardPage() {
         />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="stagger-children grid gap-4 lg:grid-cols-3">
         <LoanListCard
           title="Devoluções atrasadas"
           description="Empréstimos que passaram da data combinada."

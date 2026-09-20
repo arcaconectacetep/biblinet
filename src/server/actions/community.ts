@@ -122,7 +122,7 @@ export async function submitBugReport(input: unknown): Promise<ActionResult> {
 
   return {
     ok: true,
-    message: "Relato enviado. Obrigado por ajudar a melhorar o Biblinet!",
+    message: "Relato enviado. Obrigado por ajudar a melhorar o BibliNet!",
   };
 }
 

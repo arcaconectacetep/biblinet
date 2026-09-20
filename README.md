@@ -1,4 +1,4 @@
-# Biblinet
+# BibliNet
 
 Sistema de biblioteca escolar: acervo físico e digital, empréstimos e devoluções,
 portal do aluno e mural da turma. Projeto de feira de ciências, reescrito a partir
@@ -101,11 +101,13 @@ src/
     (app)/               área autenticada (portal do aluno + painel)
     api/board/           leitura do mural (consultado periodicamente)
   components/            UI da aplicação (ui/ = shadcn)
+  app/icon.png           favicon, recortado da logo
   lib/                   env, sessão, validações, formatação, constantes
   server/
     actions/             Server Actions (toda escrita passa por aqui)
     queries/             leituras reaproveitadas pelas páginas
   proxy.ts               primeiro filtro de rotas autenticadas
+public/brand/            emblema da logo (marca do cabeçalho e do login)
 legacy/                  protótipo original, apenas como referência
 ```
 

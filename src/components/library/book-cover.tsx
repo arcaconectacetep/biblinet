@@ -4,9 +4,9 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
- * Covers are optional: without one, the book still gets a distinctive tile
- * instead of a broken image. Thumbnails (`compact`) show only the icon — the
- * title would be unreadable and spill out of a 40px-wide box.
+ * Covers are optional: without one the book gets a neutral tile with a book
+ * glyph. The title is never drawn inside it — every place that shows a cover
+ * already prints the title next to it.
  */
 export function BookCover({
   title,
@@ -37,16 +37,14 @@ export function BookCover({
           className="object-cover"
         />
       ) : (
-        <div className="flex size-full flex-col items-center justify-center gap-2 overflow-hidden p-3 text-center">
+        <div className="flex size-full items-center justify-center">
           <BookOpen
-            className={cn("text-muted-foreground/60", compact ? "size-4" : "size-6")}
+            className={cn(
+              "text-muted-foreground/50",
+              compact ? "size-4" : "size-8",
+            )}
             aria-hidden
           />
-          {compact ? null : (
-            <span className="line-clamp-4 text-xs leading-snug font-medium text-balance text-foreground/70">
-              {title}
-            </span>
-          )}
         </div>
       )}
     </div>

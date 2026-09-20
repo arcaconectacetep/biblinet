@@ -43,7 +43,7 @@ export default async function LibraryPage() {
         </p>
       </header>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="stagger-children grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard
           label="Comigo agora"
           value={activeLoans.length}

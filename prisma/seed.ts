@@ -246,7 +246,7 @@ async function main() {
     await prisma.book.create({
       data: {
         title: sampleDigitalTitle,
-        author: "Equipe Biblinet",
+        author: "Equipe BibliNet",
         genre: "Didático / Acadêmico",
         format: "DIGITAL",
         // Placeholder PDF: replace it with the school's own material.

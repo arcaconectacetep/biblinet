@@ -4,7 +4,6 @@ import { ExternalLink, LibraryBig, MapPin, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { BookCover } from "@/components/library/book-cover";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Empty,
@@ -167,8 +166,14 @@ export function Catalog({ books }: { books: CatalogBook[] }) {
         </Empty>
       ) : (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
-          {filtered.map((book) => (
-            <li key={book.id}>
+          {filtered.map((book, index) => (
+            <li
+              key={book.id}
+              className="enter-view"
+              // Only the first rows stagger; after that the delay would be
+              // felt as lag rather than polish.
+              style={{ animationDelay: `${Math.min(index, 11) * 25}ms` }}
+            >
               <BookCard book={book} />
             </li>
           ))}
@@ -179,7 +184,9 @@ export function Catalog({ books }: { books: CatalogBook[] }) {
 }
 
 function LentStatus({ dueDate }: { dueDate: Date | string | null }) {
-  const isOverdue = dueDate ? daysUntil(dueDate) < 0 : false;
+  const daysLeft = dueDate ? daysUntil(dueDate) : null;
+  const isOverdue = daysLeft !== null && daysLeft < 0;
+  const isDueToday = daysLeft === 0;
 
   return (
     <p
@@ -197,7 +204,9 @@ function LentStatus({ dueDate }: { dueDate: Date | string | null }) {
       />
       {isOverdue
         ? "Emprestado · devolução atrasada"
-        : `Volta em ${dueDate ? formatDateOnly(dueDate) : "breve"}`}
+        : isDueToday
+          ? "Emprestado · volta hoje"
+          : `Volta em ${dueDate ? formatDateOnly(dueDate) : "breve"}`}
     </p>
   );
 }
@@ -206,16 +215,13 @@ function BookCard({ book }: { book: CatalogBook }) {
   const isDigital = book.format === "DIGITAL";
 
   return (
-    <article className="group flex h-full flex-col gap-2.5 rounded-lg border border-border bg-card p-2.5 transition-colors hover:border-foreground/25">
+    <article className="interactive-card group flex h-full flex-col gap-2.5 rounded-lg border border-border bg-card p-2.5">
       <div className="relative overflow-hidden rounded-lg">
         <BookCover title={book.title} coverUrl={book.coverUrl} />
 
-        <Badge
-          variant={isDigital ? "default" : "secondary"}
-          className="absolute top-2 right-2"
-        >
+        <span className="absolute top-2 right-2 rounded-full border border-border bg-background/90 px-2 py-0.5 text-[10px] font-medium">
           {BOOK_FORMAT_LABELS[book.format]}
-        </Badge>
+        </span>
       </div>
 
       <div className="flex flex-1 flex-col gap-1">

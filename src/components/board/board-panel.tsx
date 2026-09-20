@@ -48,7 +48,8 @@ export function BoardPanel({
   const [messages, setMessages] = useState(initialMessages);
   const [content, setContent] = useState("");
   const [isPending, startTransition] = useTransition();
-  const listEndRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const lastMessageId = useRef(initialMessages.at(-1)?.id ?? null);
 
   const refresh = useCallback(async () => {
     try {
@@ -57,7 +58,15 @@ export function BoardPanel({
       if (!response.ok) return;
 
       const data: { messages: BoardMessageView[] } = await response.json();
-      setMessages(data.messages);
+
+      // Polling every few seconds would re-render the whole thread each time
+      // and make it flicker, so identical payloads are dropped.
+      setMessages((current) =>
+        current.length === data.messages.length &&
+        current.every((message, index) => message.id === data.messages[index].id)
+          ? current
+          : data.messages,
+      );
     } catch {
       // A failed poll is not worth interrupting the user — the next one retries.
     }
@@ -72,7 +81,17 @@ export function BoardPanel({
   }, [refresh]);
 
   useEffect(() => {
-    listEndRef.current?.scrollIntoView({ block: "end" });
+    const latestId = messages.at(-1)?.id ?? null;
+
+    if (latestId === lastMessageId.current) return;
+
+    lastMessageId.current = latestId;
+
+    // Scrolling the panel itself, instead of `scrollIntoView`, keeps the page
+    // from jumping when a new message lands.
+    const viewport = viewportRef.current;
+
+    if (viewport) viewport.scrollTop = viewport.scrollHeight;
   }, [messages]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -124,9 +143,9 @@ export function BoardPanel({
       </CardHeader>
 
       <CardContent className="flex flex-1 flex-col gap-4">
-        <ScrollArea className="h-64 pr-3">
+        <ScrollArea className="h-64 pr-3" viewportRef={viewportRef}>
           {messages.length === 0 ? (
-            <p className="py-10 text-center text-xs text-muted-foreground">
+            <p className="flex h-64 items-center justify-center px-6 text-center text-xs text-balance text-muted-foreground">
               Ninguém escreveu nada ainda. Seja o primeiro!
             </p>
           ) : (
@@ -135,7 +154,7 @@ export function BoardPanel({
                 const isMine = message.userId === currentUserId;
 
                 return (
-                  <li key={message.id} className="flex items-start gap-2.5">
+                  <li key={message.id} className="enter-view flex items-start gap-2.5">
                     <Avatar className="size-7 shrink-0">
                       <AvatarFallback className="bg-muted text-[10px] font-medium text-muted-foreground">
                         {getInitials(message.user.name)}
@@ -173,7 +192,6 @@ export function BoardPanel({
               })}
             </ul>
           )}
-          <div ref={listEndRef} />
         </ScrollArea>
 
         <form onSubmit={handleSubmit} className="flex items-center gap-2">

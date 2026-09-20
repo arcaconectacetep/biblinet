@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BookOpenText, GraduationCap, ShieldCheck } from "lucide-react";
 
 import { LoginForm } from "@/components/auth/login-form";
-import { Brand, BrandMark } from "@/components/brand";
+import { BrandMark } from "@/components/brand";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
@@ -34,7 +34,15 @@ export default function LoginPage() {
   return (
     <div className="grid w-full items-center gap-10 lg:grid-cols-[1.1fr_minmax(0,26rem)] lg:gap-16">
       <section className="hidden space-y-8 lg:block">
-        <Brand size="lg" />
+        <div className="flex items-center gap-4">
+          <BrandMark size="xl" priority />
+          <div>
+            <p className="text-3xl font-semibold tracking-tight">BibliNet</p>
+            <p className="text-sm text-muted-foreground">
+              Sua porta de entrada para o conhecimento infinito
+            </p>
+          </div>
+        </div>
 
         <div className="space-y-3">
           <h1 className="text-3xl font-semibold tracking-tight text-balance">
@@ -70,10 +78,10 @@ export default function LoginPage() {
         <Card className="surface rounded-xl">
           <CardContent className="space-y-7 p-7 sm:p-8">
             <div className="space-y-4 text-center lg:text-left">
-              <BrandMark size="lg" className="mx-auto lg:hidden" />
+              <BrandMark size="lg" priority className="mx-auto lg:hidden" />
               <div className="space-y-1.5">
                 <h2 className="text-xl font-semibold tracking-tight">
-                  Bem-vindo ao Biblinet
+                  Bem-vindo ao BibliNet
                 </h2>
                 <p className="text-sm text-muted-foreground">
                   Entre com o usuário e a senha da escola.

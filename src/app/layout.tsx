@@ -19,12 +19,12 @@ const mono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Biblinet · Biblioteca Escolar",
-    template: "%s · Biblinet",
+    default: "BibliNet · Biblioteca Escolar",
+    template: "%s · BibliNet",
   },
   description:
     "Sistema de biblioteca escolar: acervo físico e digital, empréstimos, devoluções e mural da turma.",
-  applicationName: "Biblinet",
+  applicationName: "BibliNet",
   robots: { index: false, follow: false },
 };
 
