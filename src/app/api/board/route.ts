@@ -4,6 +4,7 @@ import { getSessionUser } from "@/lib/auth/current-user";
 import { getBoardMessages } from "@/server/queries/library";
 
 export const dynamic = "force-dynamic";
+export const preferredRegion = ["gru1"];
 
 /** Polled by the board panel so new messages appear without a page reload. */
 export async function GET() {

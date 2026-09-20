@@ -117,6 +117,30 @@ legacy/                  protótipo original, apenas como referência
 3. `src/server/actions/*` — toda ação revalida os dados com Zod e confere o papel
    do usuário antes de escrever. O cliente nunca é fonte de verdade.
 
+## Deploy (Vercel)
+
+O app precisa de servidor Node: Server Actions, sessão em cookie e Prisma
+falando com o Postgres. Hospedagem estática (GitHub Pages) não serve.
+
+Na Vercel, configure em *Settings → Environment Variables*:
+
+| Variável         | Valor                                                     |
+| ---------------- | --------------------------------------------------------- |
+| `DATABASE_URL`   | pooler de transação do Supabase (porta 6543)               |
+| `DIRECT_URL`     | pooler de sessão (porta 5432)                              |
+| `SESSION_SECRET` | o mesmo segredo do `.env.local`, ou um novo (desloga todos) |
+
+Dois detalhes já resolvidos no código:
+
+- `postinstall` roda `prisma generate` — o cliente gerado não vai para o git,
+  então sem isso o build quebra em qualquer host.
+- As rotas declaram `preferredRegion = ["gru1"]` (São Paulo), perto do banco em
+  `sa-east-1`. Sem isso as funções sobem nos EUA e cada consulta atravessa o
+  continente.
+
+Mudanças de schema continuam saindo da sua máquina (`npm run db:push`): o
+deploy não altera o banco.
+
 ## Antes de tornar o repositório público
 
 O protótipo em `legacy/` tinha duas chaves de API escritas direto no código

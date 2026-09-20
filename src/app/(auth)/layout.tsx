@@ -1,3 +1,9 @@
+/**
+ * The database lives in Supabase's sa-east-1 region, so the server code
+ * runs in São Paulo to keep each query on the same continent.
+ */
+export const preferredRegion = ["gru1"];
+
 export default function AuthLayout({
   children,
 }: {
