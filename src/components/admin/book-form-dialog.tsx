@@ -7,6 +7,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 
+import { ComboboxField } from "@/components/form/combobox-field";
 import { SelectField, toOptions } from "@/components/form/select-field";
 import { TextField } from "@/components/form/text-field";
 import { SubmitButton } from "@/components/submit-button";
@@ -135,10 +136,12 @@ export function BookFormDialog({
               {...register("author")}
             />
 
-            <SelectField
+            <ComboboxField
               control={control}
               name="genre"
               label="Gênero"
+              searchPlaceholder="Buscar gênero..."
+              emptyMessage="Nenhum gênero com esse nome."
               options={toOptions(GENRES)}
             />
 

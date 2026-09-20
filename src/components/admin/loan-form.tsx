@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 
-import { SelectField, type SelectOption } from "@/components/form/select-field";
+import { ComboboxField } from "@/components/form/combobox-field";
+import type { SelectOption } from "@/components/form/select-field";
 import { TextField } from "@/components/form/text-field";
 import { SubmitButton } from "@/components/submit-button";
 import { Button } from "@/components/ui/button";
@@ -88,7 +89,7 @@ export function LoanForm({
 
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-4" noValidate>
-          <SelectField
+          <ComboboxField
             control={control}
             name="userId"
             label="Aluno"
@@ -97,10 +98,12 @@ export function LoanForm({
                 ? "Nenhum aluno cadastrado"
                 : "Selecione o aluno"
             }
+            searchPlaceholder="Buscar por nome ou turma..."
+            emptyMessage="Nenhum aluno encontrado."
             options={students}
           />
 
-          <SelectField
+          <ComboboxField
             control={control}
             name="bookId"
             label="Livro"
@@ -109,6 +112,8 @@ export function LoanForm({
                 ? "Nenhum exemplar disponível"
                 : "Selecione o livro"
             }
+            searchPlaceholder="Buscar por título ou autor..."
+            emptyMessage="Nenhum livro disponível com esse termo."
             options={availableBooks}
           />
 
