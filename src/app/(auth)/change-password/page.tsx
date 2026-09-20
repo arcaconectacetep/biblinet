@@ -15,12 +15,12 @@ export default async function ChangePasswordPage() {
   const user = await requireUser();
 
   return (
-    <Card className="glass-panel mx-auto w-full max-w-md rounded-3xl">
+    <Card className="surface mx-auto w-full max-w-md rounded-xl">
       <CardContent className="space-y-7 p-7 sm:p-9">
         <div className="space-y-4 text-center">
           <BrandMark size="lg" className="mx-auto" />
           <div className="space-y-1.5">
-            <h1 className="text-2xl font-extrabold tracking-tight">
+            <h1 className="text-2xl font-semibold tracking-tight">
               {user.mustChangePassword ? "Crie a sua senha" : "Trocar senha"}
             </h1>
             <p className="text-sm text-muted-foreground">

@@ -24,7 +24,7 @@ export function BookCover({
   return (
     <div
       className={cn(
-        "relative aspect-3/4 w-full overflow-hidden rounded-lg border border-border/60 bg-gradient-to-br from-primary/25 via-card to-fuchsia-500/10",
+        "relative aspect-4/5 w-full overflow-hidden rounded-md border border-border bg-muted",
         className,
       )}
     >
@@ -37,13 +37,13 @@ export function BookCover({
           className="object-cover"
         />
       ) : (
-        <div className="flex size-full flex-col items-center justify-center gap-1.5 overflow-hidden p-2 text-center">
+        <div className="flex size-full flex-col items-center justify-center gap-2 overflow-hidden p-3 text-center">
           <BookOpen
-            className={cn("text-primary/70", compact ? "size-4" : "size-7")}
+            className={cn("text-muted-foreground/60", compact ? "size-4" : "size-6")}
             aria-hidden
           />
           {compact ? null : (
-            <span className="line-clamp-3 text-[11px] leading-tight font-semibold text-balance text-muted-foreground">
+            <span className="line-clamp-4 text-xs leading-snug font-medium text-balance text-foreground/70">
               {title}
             </span>
           )}

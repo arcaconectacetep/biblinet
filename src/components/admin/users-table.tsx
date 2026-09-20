@@ -42,7 +42,7 @@ function UserIdentity({ user, isSelf }: { user: AdminUser; isSelf: boolean }) {
   return (
     <div className="flex min-w-0 flex-1 items-center gap-3">
       <Avatar className="size-9">
-        <AvatarFallback className="bg-primary/15 text-[11px] font-bold text-primary">
+        <AvatarFallback className="bg-muted text-[11px] font-medium text-muted-foreground">
           {getInitials(user.name)}
         </AvatarFallback>
       </Avatar>
@@ -209,7 +209,7 @@ export function UsersTable({
 
   if (users.length === 0) {
     return (
-      <Empty className="rounded-2xl border border-dashed border-border/60">
+      <Empty className="rounded-lg border border-dashed border-border">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <Users aria-hidden />

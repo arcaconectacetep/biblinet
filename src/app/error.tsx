@@ -24,12 +24,12 @@ export default function ErrorBoundary({
 
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-10">
-      <Card className="glass-panel w-full max-w-md rounded-3xl">
+      <Card className="surface w-full max-w-md rounded-xl">
         <CardContent className="space-y-6 p-8 text-center">
           <BrandMark size="lg" className="mx-auto" />
 
           <div className="space-y-2">
-            <h1 className="flex items-center justify-center gap-2 text-2xl font-extrabold tracking-tight">
+            <h1 className="flex items-center justify-center gap-2 text-2xl font-semibold tracking-tight">
               <ServerCrash className="size-6 text-destructive" aria-hidden />
               Algo deu errado
             </h1>

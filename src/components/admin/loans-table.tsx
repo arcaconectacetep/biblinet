@@ -116,7 +116,7 @@ export function ActiveLoansTable({ loans }: { loans: AdminLoan[] }) {
       header: "Livro",
       cell: (loan) => (
         <div className="min-w-0">
-          <p className="truncate font-medium text-primary">{loan.book.title}</p>
+          <p className="truncate font-medium">{loan.book.title}</p>
           {loan.book.shelf ? (
             <p className="truncate text-xs text-muted-foreground">
               {loan.book.shelf}
@@ -137,7 +137,7 @@ export function ActiveLoansTable({ loans }: { loans: AdminLoan[] }) {
 
   if (loans.length === 0) {
     return (
-      <Empty className="rounded-2xl border border-dashed border-border/60">
+      <Empty className="rounded-lg border border-dashed border-border">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <CheckCircle2 aria-hidden />
@@ -166,7 +166,7 @@ export function ActiveLoansTable({ loans }: { loans: AdminLoan[] }) {
           </div>
 
           <div>
-            <p className="font-medium text-primary">{loan.book.title}</p>
+            <p className="font-medium">{loan.book.title}</p>
             {loan.book.shelf ? (
               <p className="text-xs text-muted-foreground">{loan.book.shelf}</p>
             ) : null}
@@ -234,7 +234,7 @@ export function LoanHistoryTable({ loans }: { loans: AdminLoan[] }) {
 
   if (loans.length === 0) {
     return (
-      <Empty className="rounded-2xl border border-dashed border-border/60">
+      <Empty className="rounded-lg border border-dashed border-border">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <Repeat2 aria-hidden />

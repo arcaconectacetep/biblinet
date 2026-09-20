@@ -37,7 +37,7 @@ export default function LoginPage() {
         <Brand size="lg" />
 
         <div className="space-y-3">
-          <h1 className="text-4xl font-extrabold tracking-tight text-balance">
+          <h1 className="text-3xl font-semibold tracking-tight text-balance">
             A biblioteca da escola, do acervo ao empréstimo.
           </h1>
           <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -50,9 +50,9 @@ export default function LoginPage() {
           {highlights.map(({ icon: Icon, title, description }) => (
             <li
               key={title}
-              className="flex gap-3 rounded-2xl border border-border/60 bg-card/40 p-4 backdrop-blur-sm"
+              className="flex gap-3 rounded-lg border border-border bg-card p-4"
             >
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
                 <Icon className="size-4.5" aria-hidden />
               </span>
               <div className="space-y-0.5">
@@ -67,12 +67,12 @@ export default function LoginPage() {
       </section>
 
       <div className="space-y-5">
-        <Card className="glass-panel rounded-3xl">
+        <Card className="surface rounded-xl">
           <CardContent className="space-y-7 p-7 sm:p-8">
             <div className="space-y-4 text-center lg:text-left">
               <BrandMark size="lg" className="mx-auto lg:hidden" />
               <div className="space-y-1.5">
-                <h2 className="text-2xl font-extrabold tracking-tight">
+                <h2 className="text-xl font-semibold tracking-tight">
                   Bem-vindo ao Biblinet
                 </h2>
                 <p className="text-sm text-muted-foreground">
@@ -89,9 +89,9 @@ export default function LoginPage() {
           {highlights.slice(1).map(({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className="flex gap-3 rounded-2xl border border-border/60 bg-card/40 p-4"
+              className="flex gap-3 rounded-lg border border-border bg-card p-4"
             >
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
                 <Icon className="size-4" aria-hidden />
               </span>
               <div className="space-y-0.5">

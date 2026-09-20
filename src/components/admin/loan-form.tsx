@@ -78,7 +78,7 @@ export function LoanForm({
   const noBooksAvailable = availableBooks.length === 0;
 
   return (
-    <Card className="glass-panel rounded-2xl">
+    <Card className="surface rounded-lg">
       <CardHeader>
         <CardTitle className="text-base">Registrar empréstimo</CardTitle>
         <CardDescription>

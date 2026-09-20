@@ -1,54 +1,53 @@
 import type { LucideIcon } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-const tones = {
-  primary: "bg-primary/15 text-primary",
-  success: "bg-success/15 text-success",
-  warning: "bg-warning/15 text-warning",
-  destructive: "bg-destructive/15 text-destructive",
+const valueTones = {
+  neutral: "text-foreground",
+  success: "text-success",
+  warning: "text-warning",
+  destructive: "text-destructive",
 } as const;
 
+/**
+ * Metric tile: the number carries the meaning, so the label sits above it in
+ * small type and the icon stays a quiet marker in the corner.
+ */
 export function StatCard({
   label,
   value,
   hint,
   icon: Icon,
-  tone = "primary",
+  tone = "neutral",
 }: {
   label: string;
   value: string | number;
   hint?: string;
   icon: LucideIcon;
-  tone?: keyof typeof tones;
+  tone?: keyof typeof valueTones;
 }) {
   return (
-    <Card className="glass-panel rounded-2xl">
-      <CardContent className="flex items-start gap-3 p-4">
-        <span
-          className={cn(
-            "flex size-9 shrink-0 items-center justify-center rounded-lg",
-            tones[tone],
-          )}
-        >
-          <Icon className="size-4.5" aria-hidden />
-        </span>
+    <div className="surface rounded-lg p-4">
+      <div className="flex items-start justify-between gap-3">
+        <p className="text-xs font-medium text-muted-foreground">{label}</p>
+        <Icon className="size-4 shrink-0 text-muted-foreground/70" aria-hidden />
+      </div>
 
-        <div className="min-w-0 space-y-0.5">
-          <p className="text-[11px] leading-tight font-semibold tracking-wide text-muted-foreground uppercase">
-            {label}
-          </p>
-          <p className="text-2xl leading-none font-extrabold tracking-tight">
-            {value}
-          </p>
-          {hint ? (
-            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
-              {hint}
-            </p>
-          ) : null}
-        </div>
-      </CardContent>
-    </Card>
+      <p
+        data-slot="stat-value"
+        className={cn(
+          "mt-2 text-[28px] leading-none font-semibold tracking-tight",
+          valueTones[tone],
+        )}
+      >
+        {value}
+      </p>
+
+      {hint ? (
+        <p className="mt-1.5 line-clamp-2 text-xs leading-snug text-muted-foreground">
+          {hint}
+        </p>
+      ) : null}
+    </div>
   );
 }

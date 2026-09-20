@@ -30,8 +30,8 @@ export function UserMenu({ user }: { user: SessionUser }) {
           className="h-auto gap-2.5 rounded-full py-1.5 pr-3 pl-1.5"
           aria-label="Abrir menu da conta"
         >
-          <Avatar className="size-8 border border-primary/40">
-            <AvatarFallback className="bg-primary/15 text-xs font-bold text-primary">
+          <Avatar className="size-8">
+            <AvatarFallback className="bg-muted text-xs font-medium text-muted-foreground">
               {getInitials(user.name)}
             </AvatarFallback>
           </Avatar>

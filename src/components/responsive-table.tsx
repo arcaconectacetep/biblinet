@@ -37,7 +37,7 @@ export function ResponsiveTable<TItem>({
 }) {
   if (items.length === 0) {
     return (
-      <div className="rounded-2xl border border-border/60 bg-card/50 p-8 text-center text-sm text-muted-foreground">
+      <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
         {emptyMessage}
       </div>
     );
@@ -45,7 +45,7 @@ export function ResponsiveTable<TItem>({
 
   return (
     <>
-      <div className="hidden overflow-hidden rounded-2xl border border-border/60 bg-card/50 md:block">
+      <div className="hidden overflow-hidden rounded-lg border border-border bg-card md:block">
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
@@ -87,7 +87,7 @@ export function ResponsiveTable<TItem>({
         {items.map((item) => (
           <li
             key={getRowKey(item)}
-            className="rounded-2xl border border-border/60 bg-card/50 p-4"
+            className="rounded-lg border border-border bg-card p-4"
           >
             {renderCard(item)}
           </li>

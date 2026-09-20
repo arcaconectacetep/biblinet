@@ -111,10 +111,10 @@ export function BoardPanel({
   }
 
   return (
-    <Card className="glass-panel flex h-full flex-col rounded-2xl">
+    <Card className="surface flex h-full flex-col rounded-lg">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
-          <MessagesSquare className="size-4 text-primary" aria-hidden />
+          <MessagesSquare className="size-4 text-muted-foreground" aria-hidden />
           Mural da turma
         </CardTitle>
         <CardDescription>
@@ -124,7 +124,7 @@ export function BoardPanel({
       </CardHeader>
 
       <CardContent className="flex flex-1 flex-col gap-4">
-        <ScrollArea className="h-72 pr-3">
+        <ScrollArea className="h-64 pr-3">
           {messages.length === 0 ? (
             <p className="py-10 text-center text-xs text-muted-foreground">
               Ninguém escreveu nada ainda. Seja o primeiro!
@@ -137,14 +137,14 @@ export function BoardPanel({
                 return (
                   <li key={message.id} className="flex items-start gap-2.5">
                     <Avatar className="size-7 shrink-0">
-                      <AvatarFallback className="bg-primary/15 text-[10px] font-bold text-primary">
+                      <AvatarFallback className="bg-muted text-[10px] font-medium text-muted-foreground">
                         {getInitials(message.user.name)}
                       </AvatarFallback>
                     </Avatar>
 
-                    <div className="min-w-0 flex-1 rounded-xl rounded-tl-none border border-border/60 bg-card/70 px-3 py-2">
+                    <div className="min-w-0 flex-1 rounded-xl rounded-tl-none border border-border bg-card px-3 py-2">
                       <div className="flex items-center gap-2">
-                        <span className="truncate text-xs font-semibold text-primary">
+                        <span className="truncate text-xs font-medium">
                           {message.user.name}
                         </span>
                         <span className="ml-auto shrink-0 font-mono text-[10px] text-muted-foreground">

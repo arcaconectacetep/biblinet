@@ -106,7 +106,7 @@ export function ReportsTable({ reports }: { reports: AdminBugReport[] }) {
       className: "max-w-md",
       cell: (report) => (
         <div className="space-y-1">
-          <p className="text-xs font-semibold text-primary">{report.category}</p>
+          <p className="text-xs font-medium text-muted-foreground">{report.category}</p>
           <p className="text-sm whitespace-pre-wrap">{report.description}</p>
         </div>
       ),
@@ -136,7 +136,7 @@ export function ReportsTable({ reports }: { reports: AdminBugReport[] }) {
 
   if (reports.length === 0) {
     return (
-      <Empty className="rounded-2xl border border-dashed border-border/60">
+      <Empty className="rounded-lg border border-dashed border-border">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <BugOff aria-hidden />
@@ -159,7 +159,7 @@ export function ReportsTable({ reports }: { reports: AdminBugReport[] }) {
         <div className="space-y-3">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0 space-y-1">
-              <p className="text-xs font-semibold text-primary">
+              <p className="text-xs font-medium text-muted-foreground">
                 {report.category}
               </p>
               <p className="text-sm whitespace-pre-wrap">{report.description}</p>

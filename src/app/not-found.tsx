@@ -8,12 +8,12 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function NotFound() {
   return (
     <main className="flex flex-1 items-center justify-center px-4 py-10">
-      <Card className="glass-panel w-full max-w-md rounded-3xl">
+      <Card className="surface w-full max-w-md rounded-xl">
         <CardContent className="space-y-6 p-8 text-center">
           <BrandMark size="lg" className="mx-auto" />
 
           <div className="space-y-2">
-            <h1 className="text-2xl font-extrabold tracking-tight">
+            <h1 className="text-2xl font-semibold tracking-tight">
               Página não encontrada
             </h1>
             <p className="text-sm text-muted-foreground">

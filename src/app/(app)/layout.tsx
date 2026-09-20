@@ -19,7 +19,7 @@ export default async function AppLayout({
       <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
         {children}
       </main>
-      <footer className="border-t border-border/60 py-6">
+      <footer className="border-t border-border py-6">
         <p className="mx-auto max-w-7xl px-4 text-center text-xs text-muted-foreground sm:px-6">
           Biblinet · Projeto de biblioteca escolar para a feira de ciências
         </p>

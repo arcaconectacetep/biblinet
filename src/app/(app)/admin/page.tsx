@@ -114,14 +114,13 @@ export default async function AdminDashboardPage() {
           value={activeLoanCount}
           hint="em aberto"
           icon={Repeat2}
-          tone={activeLoanCount > 0 ? "warning" : "success"}
         />
         <StatCard
           label="Atrasados"
           value={overdueLoans.length}
           hint="precisam de cobrança"
           icon={AlertTriangle}
-          tone={overdueLoans.length > 0 ? "destructive" : "success"}
+          tone={overdueLoans.length > 0 ? "destructive" : "neutral"}
         />
       </div>
 
@@ -130,7 +129,7 @@ export default async function AdminDashboardPage() {
           title="Devoluções atrasadas"
           description="Empréstimos que passaram da data combinada."
           icon={
-            <AlertTriangle className="size-4 text-destructive" aria-hidden />
+            <AlertTriangle className="size-4 text-muted-foreground" aria-hidden />
           }
           loans={overdueLoans}
           emptyMessage="Nenhum atraso. Biblioteca em dia!"
@@ -144,7 +143,7 @@ export default async function AdminDashboardPage() {
         <LoanListCard
           title="Próximas devoluções"
           description="Quem devolve nos próximos dias."
-          icon={<CalendarClock className="size-4 text-primary" aria-hidden />}
+          icon={<CalendarClock className="size-4 text-muted-foreground" aria-hidden />}
           loans={upcomingLoans}
           emptyMessage="Nenhum empréstimo em aberto."
           renderMeta={(loan) => (
@@ -154,7 +153,7 @@ export default async function AdminDashboardPage() {
           )}
         />
 
-        <Card className="glass-panel rounded-2xl">
+        <Card className="surface rounded-lg">
           <CardHeader>
             <CardTitle className="text-base">Atalhos</CardTitle>
             <CardDescription>As tarefas mais comuns do dia.</CardDescription>
@@ -198,7 +197,7 @@ function LoanListCard({
   renderMeta: (loan: LoanSummary) => React.ReactNode;
 }) {
   return (
-    <Card className="glass-panel rounded-2xl">
+    <Card className="surface rounded-lg">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           {icon}
@@ -209,11 +208,11 @@ function LoanListCard({
 
       <CardContent>
         {loans.length === 0 ? (
-          <p className="rounded-xl border border-dashed border-border/60 px-4 py-6 text-center text-sm text-muted-foreground">
+          <p className="rounded-xl border border-dashed border-border px-4 py-6 text-center text-sm text-muted-foreground">
             {emptyMessage}
           </p>
         ) : (
-          <ul className="divide-y divide-border/60">
+          <ul className="divide-y divide-border">
             {loans.map((loan) => (
               <li
                 key={loan.id}

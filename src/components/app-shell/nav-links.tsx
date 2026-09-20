@@ -48,9 +48,9 @@ export function NavLinks({
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+              "inline-flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors",
               active
-                ? "bg-primary/15 text-primary"
+                ? "bg-muted font-medium text-foreground"
                 : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
             )}
           >

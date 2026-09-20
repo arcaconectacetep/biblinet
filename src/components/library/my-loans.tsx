@@ -35,7 +35,7 @@ export function MyLoans({ loans }: { loans: StudentLoan[] }) {
 
   if (activeLoans.length === 0) {
     return (
-      <Empty className="rounded-2xl border border-dashed border-border/60">
+      <Empty className="rounded-lg border border-dashed border-border">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <CheckCircle2 aria-hidden />
@@ -57,7 +57,7 @@ export function MyLoans({ loans }: { loans: StudentLoan[] }) {
         return (
           <li
             key={loan.id}
-            className="flex gap-3 rounded-2xl border border-border/60 bg-card/60 p-3"
+            className="flex gap-3 rounded-lg border border-border bg-card p-3"
           >
             <BookCover
               title={loan.book.title}

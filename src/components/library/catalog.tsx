@@ -72,7 +72,7 @@ export function Catalog({ books }: { books: CatalogBook[] }) {
 
   return (
     <section className="space-y-4">
-      <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-card/40 p-3 lg:flex-row lg:items-center">
+      <div className="flex flex-col gap-3 rounded-lg border border-border bg-card p-3 lg:flex-row lg:items-center">
         <div className="relative min-w-0 flex-1">
           <Search
             className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
@@ -108,7 +108,7 @@ export function Catalog({ books }: { books: CatalogBook[] }) {
           <div
             role="group"
             aria-label="Filtrar por formato"
-            className="flex items-center gap-1 rounded-full border border-border/60 bg-background/60 p-1"
+            className="flex items-center gap-1 rounded-full border border-border bg-background p-1"
           >
             {FORMAT_FILTERS.map((option) => (
               <Button
@@ -154,7 +154,7 @@ export function Catalog({ books }: { books: CatalogBook[] }) {
       </div>
 
       {filtered.length === 0 ? (
-        <Empty className="rounded-2xl border border-dashed border-border/60">
+        <Empty className="rounded-lg border border-dashed border-border">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <LibraryBig aria-hidden />
@@ -206,13 +206,13 @@ function BookCard({ book }: { book: CatalogBook }) {
   const isDigital = book.format === "DIGITAL";
 
   return (
-    <article className="group flex h-full flex-col gap-2.5 rounded-2xl border border-border/60 bg-card/60 p-2.5 transition-colors hover:border-primary/50">
+    <article className="group flex h-full flex-col gap-2.5 rounded-lg border border-border bg-card p-2.5 transition-colors hover:border-foreground/25">
       <div className="relative overflow-hidden rounded-lg">
         <BookCover title={book.title} coverUrl={book.coverUrl} />
 
         <Badge
           variant={isDigital ? "default" : "secondary"}
-          className="absolute top-2 right-2 shadow-sm"
+          className="absolute top-2 right-2"
         >
           {BOOK_FORMAT_LABELS[book.format]}
         </Badge>
@@ -225,7 +225,7 @@ function BookCard({ book }: { book: CatalogBook }) {
         <p className="line-clamp-1 text-xs text-muted-foreground">
           {book.author}
         </p>
-        <p className="line-clamp-1 text-[11px] text-muted-foreground/80">
+        <p className="line-clamp-1 text-[11px] text-muted-foreground">
           {book.genre}
         </p>
 

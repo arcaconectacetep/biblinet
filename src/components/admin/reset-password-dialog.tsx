@@ -91,7 +91,7 @@ export function ResetPasswordDialog({
         {temporaryPassword ? (
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <code className="flex-1 rounded-xl border border-border/60 bg-muted/40 px-4 py-3 text-center font-mono text-lg font-bold tracking-[0.2em]">
+              <code className="flex-1 rounded-xl border border-border bg-muted/40 px-4 py-3 text-center font-mono text-lg font-bold tracking-[0.2em]">
                 {temporaryPassword}
               </code>
               <Button

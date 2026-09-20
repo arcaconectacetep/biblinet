@@ -35,7 +35,7 @@ export default async function LibraryPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-1">
-        <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+        <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
           Olá, {user.name.split(" ")[0]}
         </h1>
         <p className="text-sm text-muted-foreground">
@@ -53,7 +53,6 @@ export default async function LibraryPage() {
               : `${activeLoans.length} livros para devolver`
           }
           icon={CalendarClock}
-          tone={activeLoans.length > 0 ? "warning" : "success"}
         />
         <StatCard
           label="Acervo"
@@ -74,7 +73,6 @@ export default async function LibraryPage() {
             value={availableCount}
             hint="prontos para empréstimo ou leitura"
             icon={CheckCircle2}
-            tone="success"
           />
         )}
       </div>
@@ -83,7 +81,7 @@ export default async function LibraryPage() {
         <div className="min-w-0 space-y-8">
           {isStudent || activeLoans.length > 0 ? (
             <section className="space-y-3">
-              <h2 className="text-lg font-bold tracking-tight">
+              <h2 className="text-base font-semibold tracking-tight">
                 Meus empréstimos
               </h2>
               <MyLoans loans={loans} />
@@ -91,7 +89,7 @@ export default async function LibraryPage() {
           ) : null}
 
           <section className="space-y-3">
-            <h2 className="text-lg font-bold tracking-tight">Acervo</h2>
+            <h2 className="text-base font-semibold tracking-tight">Acervo</h2>
             <Catalog books={catalog} />
           </section>
         </div>

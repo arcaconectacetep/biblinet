@@ -164,7 +164,7 @@ export function BooksTable({ books }: { books: AdminBook[] }) {
 
   if (books.length === 0) {
     return (
-      <Empty className="rounded-2xl border border-dashed border-border/60">
+      <Empty className="rounded-lg border border-dashed border-border">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <BookMarked aria-hidden />
