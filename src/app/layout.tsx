@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 
+import { FloatingBooks } from "@/components/floating-books";
 import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
@@ -44,6 +45,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <FloatingBooks />
         {children}
         <Toaster position="top-right" richColors closeButton />
       </body>

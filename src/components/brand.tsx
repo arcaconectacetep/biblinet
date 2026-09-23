@@ -55,7 +55,12 @@ export function Brand({
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <BrandMark size={size} priority={priority} />
-      <span className={cn("font-semibold tracking-tight", sizes[size].text)}>
+      <span
+        className={cn(
+          "brand-gradient-text font-extrabold tracking-tight",
+          sizes[size].text,
+        )}
+      >
         BibliNet
       </span>
     </span>

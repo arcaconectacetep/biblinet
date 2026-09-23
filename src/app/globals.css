@@ -53,49 +53,51 @@
 }
 
 /*
- * Near-neutral dark palette: surfaces carry almost no hue, and the indigo
- * accent is reserved for actions and the active state. Status colours
- * (available / due soon / overdue) are muted on purpose — they should read as
- * information, not decoration.
+ * Palette carried over from the original BibliNet prototype (legacy/index.html):
+ * slate surfaces over a black page, indigo and purple accents, and the same
+ * animated gradient behind everything.
  */
 :root {
-  --radius: 0.5rem;
+  --radius: 1rem;
 
-  --background: oklch(0.168 0.004 286);
-  --foreground: oklch(0.955 0.002 286);
-  --card: oklch(0.203 0.005 286);
-  --card-foreground: oklch(0.955 0.002 286);
-  --popover: oklch(0.213 0.005 286);
-  --popover-foreground: oklch(0.955 0.002 286);
-  --primary: oklch(0.575 0.156 273);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.258 0.005 286);
-  --secondary-foreground: oklch(0.955 0.002 286);
-  --muted: oklch(0.238 0.005 286);
-  --muted-foreground: oklch(0.708 0.008 286);
-  --accent: oklch(0.268 0.006 286);
-  --accent-foreground: oklch(0.955 0.002 286);
-  --destructive: oklch(0.63 0.175 22);
-  --success: oklch(0.68 0.115 162);
-  --success-foreground: oklch(0.16 0.03 162);
-  --warning: oklch(0.77 0.115 74);
-  --warning-foreground: oklch(0.2 0.04 75);
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.575 0.156 273);
-  --chart-1: oklch(0.575 0.156 273);
-  --chart-2: oklch(0.68 0.115 162);
-  --chart-3: oklch(0.77 0.115 74);
-  --chart-4: oklch(0.63 0.175 22);
-  --chart-5: oklch(0.708 0.008 286);
-  --sidebar: oklch(0.19 0.004 286);
-  --sidebar-foreground: oklch(0.955 0.002 286);
-  --sidebar-primary: oklch(0.575 0.156 273);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.258 0.005 286);
-  --sidebar-accent-foreground: oklch(0.955 0.002 286);
-  --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.575 0.156 273);
+  --background: #000000;
+  --foreground: #f1f5f9;
+  /* Glass panels: slate-900 at 75%, exactly as the prototype had it. */
+  --card: rgb(15 23 42 / 0.75);
+  --card-foreground: #f1f5f9;
+  /* Menus and dialogs sit closer to opaque so text stays readable over the
+     moving background. */
+  --popover: rgb(15 23 42 / 0.96);
+  --popover-foreground: #f1f5f9;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #f1f5f9;
+  --muted: rgb(30 41 59 / 0.7);
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --accent-foreground: #f1f5f9;
+  --destructive: #f87171;
+  --success: #34d399;
+  --success-foreground: #022c22;
+  --warning: #fbbf24;
+  --warning-foreground: #451a03;
+  --border: rgb(255 255 255 / 0.08);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: #6366f1;
+  --chart-1: #6366f1;
+  --chart-2: #a855f7;
+  --chart-3: #34d399;
+  --chart-4: #fbbf24;
+  --chart-5: #ec4899;
+  --sidebar: rgb(15 23 42 / 0.75);
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: rgb(255 255 255 / 0.08);
+  --sidebar-ring: #6366f1;
 }
 
 .dark {
@@ -114,6 +116,64 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "cv11";
+    overflow-x: hidden;
+  }
+
+  /* The prototype's animated gradient, same colours and same 25s cycle. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: linear-gradient(
+      -45deg,
+      #000000,
+      #030712,
+      #1d4ed8,
+      #000000,
+      #7e22ce,
+      #000000
+    );
+    background-size: 400% 400%;
+    animation: gradient-move 25s ease infinite;
+  }
+
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(15 23 42 / 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4f46e5;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgb(99 102 241 / 0.2);
   }
 
   /* Figures share one width, so columns of numbers stay aligned. */
@@ -163,9 +223,16 @@
   }
 }
 
-/* One flat surface for every panel: hairline border, no blur, no shadow. */
+/*
+ * The prototype's `.glass-card`: translucent slate, blurred backdrop, hairline
+ * white border and a deep shadow. Every panel in the app uses it.
+ */
 @utility surface {
-  @apply border border-border bg-card;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  background: rgb(15 23 42 / 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.6);
 }
 
 /* Shared easing: quick start, soft landing. */
@@ -174,7 +241,7 @@
 }
 
 @utility enter-view {
-  animation: enter-view 320ms var(--ease-emphasized) both;
+  animation: enter-view 600ms var(--ease-emphasized) both;
 }
 
 /* Route changes only cross-fade: the content inside does the moving. */
@@ -222,15 +289,77 @@
 @keyframes enter-view {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(20px) scale(0.97);
+    filter: blur(3px);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
 /* Cards lift by a hair on hover so the grid feels responsive to the pointer. */
 @utility interactive-card {
   @apply transition-[transform,border-color,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-foreground/25;
+}
+
+@layer components {
+  /* `.bg-gradient-to-r from-indigo-600 to-purple-600` in the prototype's
+     markup, applied once here so every primary button matches. */
+  [data-slot="button"][data-variant="default"] {
+    background-image: linear-gradient(to right, #4f46e5, #9333ea);
+    box-shadow: 0 10px 15px -3px rgb(79 70 229 / 0.2);
+  }
+
+  [data-slot="button"][data-variant="default"]:hover {
+    background-image: linear-gradient(to right, #6366f1, #a855f7);
+  }
+}
+
+/* Wordmark gradient, also lifted from the prototype's header. */
+@utility brand-gradient-text {
+  background-image: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
+  background-clip: text;
+  color: transparent;
+}
+
+@layer base {
+  /* Floating books: same motion as the prototype's `.floating-book`. */
+  .floating-book {
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 15px rgb(124 58 237 / 0.3));
+    will-change: transform, opacity;
+    animation-name: float-up;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes float-up {
+    0% {
+      transform: translateY(10vh) rotate(0deg) scale(0.7);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.45;
+    }
+    85% {
+      opacity: 0.45;
+    }
+    100% {
+      transform: translateY(-115vh) rotate(360deg) scale(1.1);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .floating-books {
+      display: none;
+    }
+  }
 }

@@ -25,7 +25,7 @@ function HeaderDivider({ className }: { className?: string }) {
 
 export function AppHeader({ user }: { user: SessionUser }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background">
+    <header className="sticky top-0 z-40 border-b border-border bg-slate-900/75 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center gap-2 px-4 sm:gap-4 sm:px-6">
         <MobileNav role={user.role} />
 
